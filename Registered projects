@@ -1,0 +1,54 @@
+pip install requests beautifulsoup4
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://hprera.nic.in/PublicDashboard'
+response = requests.get(url)
+response.raise_for_status()
+soup = BeautifulSoup(response.content, 'html.parser')
+
+projects_table = soup.find('table', {'id': 'RegisteredProjects'})
+rows = projects_table.find_all('tr')
+
+project_links = []
+for row in rows[1:7]:
+    project_link = row.find('a')['href']
+    project_links.append(project_link)
+
+def get_project_details(link):
+    project_url = f"https://hprera.nic.in{link}"
+    project_response = requests.get(project_url)
+    project_response.raise_for_status()
+    project_soup = BeautifulSoup(project_response.content, 'html.parser')
+    
+    details = {
+        'GSTIN No': '',
+        'PAN No': '',
+        'Name': '',
+        'Permanent Address': ''
+    }
+    
+    labels = project_soup.find_all('label')
+    for label in labels:
+        text = label.text.strip()
+        if 'GSTIN No' in text:
+            details['GSTIN No'] = label.find_next_sibling('label').text.strip()
+        elif 'PAN No' in text:
+            details['PAN No'] = label.find_next_sibling('label').text.strip()
+        elif 'Name' in text:
+            details['Name'] = label.find_next_sibling('label').text.strip()
+        elif 'Permanent Address' in text:
+            details['Permanent Address'] = label.find_next_sibling('label').text.strip()
+    
+    return details
+
+projects_details = []
+for link in project_links:
+    details = get_project_details(link)
+    projects_details.append(details)
+
+for i, project in enumerate(projects_details, start=1):
+    print(f"Project {i}:")
+    for key, value in project.items():
+        print(f"{key}: {value}")
+    print()
