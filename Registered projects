@@ -52,3 +52,43 @@ for i, project in enumerate(projects_details, start=1):
     for key, value in project.items():
         print(f"{key}: {value}")
     print()
+
+
+
+out put 
+Project 1:
+GSTIN No: GSTIN_NUMBER_1
+PAN No: PAN_NUMBER_1
+Name: PROJECT_NAME_1
+Permanent Address: ADDRESS_1
+
+Project 2:
+GSTIN No: GSTIN_NUMBER_2
+PAN No: PAN_NUMBER_2
+Name: PROJECT_NAME_2
+Permanent Address: ADDRESS_2
+
+Project 3:
+GSTIN No: GSTIN_NUMBER_3
+PAN No: PAN_NUMBER_3
+Name: PROJECT_NAME_3
+Permanent Address: ADDRESS_3
+
+Project 4:
+GSTIN No: GSTIN_NUMBER_4
+PAN No: PAN_NUMBER_4
+Name: PROJECT_NAME_4
+Permanent Address: ADDRESS_4
+
+Project 5:
+GSTIN No: GSTIN_NUMBER_5
+PAN No: PAN_NUMBER_5
+Name: PROJECT_NAME_5
+Permanent Address: ADDRESS_5
+
+Project 6:
+GSTIN No: GSTIN_NUMBER_6
+PAN No: PAN_NUMBER_6
+Name: PROJECT_NAME_6
+Permanent Address: ADDRESS_6
+
